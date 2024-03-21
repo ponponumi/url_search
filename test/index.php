@@ -8,6 +8,8 @@ $list = \Ponponumi\UrlSearch\UrlSearch::search($text);
 
 ?>
 
+<p><?= $text ?></p>
+
 <pre><?php var_dump($list) ?></pre>
 
 <?php require __DIR__ . "/footer.php" ?>
