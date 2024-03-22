@@ -40,4 +40,11 @@ class UrlSearch{
 
     return $result;
   }
+
+  public static function check(string $text){
+    // URLが含まれるかどうか確認
+    $pattern = self::patternGet();
+    $result = preg_match($pattern,$text);
+    return $result == 1;
+  }
 }
