@@ -2,6 +2,8 @@
 
 namespace Ponponumi\UrlSearch;
 
+use Ponponumi\MatchPos\Search;
+
 class UrlSearch{
   public static function patternGet(){
     return '/(https?:\/\/(?:[a-zA-Z0-9_\-\.]+)(?:\:[0-9]+)?(?:[^\s]+))/';
@@ -18,25 +20,7 @@ class UrlSearch{
   public static function searchPos(string $text){
     // URLの開始位置も返す
     $url_list = self::search($text);
-    $result = [];
-
-    if($url_list !== []){
-      // URLがあれば
-      $start = 0;
-
-      foreach ($url_list as $url) {
-        $pos = mb_strpos($text,$url,$start);
-
-        if($pos !== false){
-          $start = $pos + 1;
-        }
-
-        $result[] = [
-          "pos" => $pos,
-          "value" => $url,
-        ];
-      }
-    }
+    $result = Search::multibyte($text,$url_list);
 
     return $result;
   }
